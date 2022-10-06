@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
 // import Search from './Search';
 
- class Login extends Component {
+class Login extends Component {
   constructor() {
     super();
     this.state = {
@@ -33,37 +33,40 @@ import { createUser } from '../services/userAPI';
   };
 
   xablau = async () => {
-    const { ArtistName, loading } = this.state;
-    this.setState(!loading);
+    const { ArtistName } = this.state;
+    this.setState({ loading: true });
     const { history } = this.props;
     await createUser({ name: ArtistName });
-    history.push('/Search');
+    history.push('/search');
   };
 
   render() {
     const { isDisabled, ArtistName, loading } = this.state;
     return (
-      {loading ? (<p>Carregando...</p>) : (
-      <div data-testid="page-login">
-        <input
-          value={ ArtistName }
-          type="text"
-          name="ArtistName"
-          data-testid="login-name-input"
-          onChange={ (event) => this.handleChangeOfName(event) }
-        />
-        <button
-          type="button"
-          data-testid="login-submit-button"
-          disabled={ isDisabled }
-          onClick={ this.xablau }
-        >
-          Entrar
-        </button>
+      <div>
+        {loading ? (<p>Carregando...</p>) : (
+          <div data-testid="page-login">
+            <input
+              value={ ArtistName }
+              type="text"
+              name="ArtistName"
+              data-testid="login-name-input"
+              onChange={ (event) => this.handleChangeOfName(event) }
+            />
+            <button
+              type="button"
+              data-testid="login-submit-button"
+              disabled={ isDisabled }
+              onClick={ this.xablau }
+            >
+              Entrar
+            </button>
+          </div>
+        )}
       </div>
-      )}
     );
   }
+}
 
 Login.propTypes = {
   history: PropTypes.shape({
