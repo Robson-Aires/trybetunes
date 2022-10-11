@@ -13,7 +13,6 @@ export default class Header extends Component {
 
   async componentDidMount() {
     const user = await getUser();
-    console.log(user);
     this.setState({
       userName: user.name,
       loading: true,
