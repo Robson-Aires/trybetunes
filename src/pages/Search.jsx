@@ -37,6 +37,7 @@ export default class Search extends Component {
     const { ArtistName } = this.state;
 
     const pesquisaArtista = await searchAlbumsAPI(ArtistName);
+    console.log(pesquisaArtista);
     this.setState({
       data: pesquisaArtista,
       query: ArtistName,
@@ -67,7 +68,7 @@ export default class Search extends Component {
           </button>
         </form>
         {
-          data.length && <p>{`Resultado de álbuns de: ${query}`}</p>
+          data.length > 0 && <p>{`Resultado de álbuns de: ${query}`}</p>
         }
         {
           data.length > 0
@@ -76,7 +77,8 @@ export default class Search extends Component {
                 key={ album.collectionId }
                 collectionName={ album.collectionName }
                 collectionId={ album.collectionId }
-              />))
+              />
+            ))
             )
             : (<p>Nenhum álbum foi encontrado</p>)
         }

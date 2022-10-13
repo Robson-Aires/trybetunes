@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
+// import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 export default class Album extends Component {
   constructor() {
@@ -11,11 +12,16 @@ export default class Album extends Component {
       artista: '',
       album: '',
       musicas: [],
+      // favoriteSongs: [],
     };
   }
 
   async componentDidMount() {
     await this.renderMusicApi();
+    // const favoriteSongs = await getFavoriteSongs();
+    this.setState({
+      // favoriteSongs,
+    });
   }
 
   renderMusicApi = async () => {
@@ -26,7 +32,10 @@ export default class Album extends Component {
       album: music[0].collectionName,
       musicas: music,
     });
-    console.log(music);
+  };
+
+  adicionarMusica = async (musica) => {
+    await addSong(musica);
   };
 
   render() {
@@ -43,10 +52,13 @@ export default class Album extends Component {
             .filter((music) => music.trackName)
             .map((musica) => (
               <MusicCard
+                musica={ musica }
                 key={ musica.trackId }
                 trackName={ musica.trackName }
                 previewUrl={ musica.previewUrl }
                 trackId={ musica.trackId }
+                adicionarMusica={ this.adicionarMusica }
+                // favoriteSongs={ favoriteSongs }
               />
             ))
         }

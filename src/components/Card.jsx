@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 export default class Card extends Component {
   render() {
     const { collectionId, collectionName } = this.props;
+    console.log(collectionId);
+    console.log(collectionName);
     return (
       <div>
         <Link
