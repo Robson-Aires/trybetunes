@@ -18,7 +18,7 @@ export default class MusicCard extends Component {
     // this.setState({
     //   favoriteSongs,
     // });
-    console.log(favoriteSongs);
+    // console.log(favoriteSongs);
     if (favoriteSongs.map((song) => Number(song.trackId)).includes(Number(trackId))) {
       this.setState({
         isChecked: true,
@@ -29,7 +29,7 @@ export default class MusicCard extends Component {
       });
     }
     // console.log(Number(trackId));
-    // console.log(favoriteSongs.map((song) => song.trackId));
+    console.log(favoriteSongs.map((song) => song.trackId));
     // console.log(favoriteSongs);
   }
 
